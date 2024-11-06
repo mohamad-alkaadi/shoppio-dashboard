@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import SideBar from "@/components/SideBar"
+import { Box } from "@mui/material"
+import NavBar from "@/components/NavBar"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex space-x-1">
+      <body className="flex">
         <SideBar />
-        {children}
+        <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+          <NavBar />
+          {children}
+        </Box>
       </body>
     </html>
   )

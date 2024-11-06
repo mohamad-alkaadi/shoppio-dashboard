@@ -1,0 +1,21 @@
+products
+    -add products
+    -manage products
+    -add discounts
+seller
+    - manage seller
+
+users
+    -manage users
+    -users history
+    -user analytics: search history, interests
+
+sales
+    -revenue tracking
+    -sales analytics
+    -transaction history
+
+orders
+    -manage orders
+    -add orders
+    -track orders
