@@ -1,7 +1,13 @@
+"use client"
 import { Box } from "@mui/material"
-import React from "react"
-
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import HomeIcon from "@mui/icons-material/Home"
 const NavBar = () => {
+  const pathname = usePathname()
+  const fileNames = pathname.split("/").filter(Boolean)
+  console.log(fileNames)
+  let result = ""
   return (
     <Box
       sx={{
@@ -13,7 +19,30 @@ const NavBar = () => {
       }}
     >
       <Box>
-        {">"}hello {">"} my {">"} friend
+        {pathname === "/" ? (
+          <span>
+            <HomeIcon /> {" / "}
+          </span>
+        ) : (
+          <Link href={"/"}>
+            <HomeIcon /> {" / "}
+          </Link>
+        )}
+        {fileNames.map((item, index) => {
+          result = result.concat("/", item)
+          return (
+            <>
+              <span key={index}>
+                {result === pathname ? (
+                  <span className="select-none">{item}</span>
+                ) : (
+                  <Link href={result}>{item}</Link>
+                )}
+                {" / "}
+              </span>
+            </>
+          )
+        })}
       </Box>
       <Box>logout</Box>
     </Box>
