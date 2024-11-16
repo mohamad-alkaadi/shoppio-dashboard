@@ -1,12 +1,11 @@
 "use client"
-import { getAllProducts } from "@/actions/products"
+import { deleteProduct, getAllProducts } from "@/actions/products"
 import { Box } from "@mui/material"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 
 const columns: GridColDef<any[number]>[] = [
-  { field: "_id", headerName: "ID" },
   { field: "name", headerName: "NAME" },
   { field: "seller", headerName: "SELLER" },
   { field: "brand", headerName: "BRAND" },
@@ -19,8 +18,14 @@ const columns: GridColDef<any[number]>[] = [
       const { id } = params.row
       return (
         <div className="flex space-x-2">
-          <Link href={`/${id}`}>EDIT</Link>
-          <button>DELETE</button>
+          <Link href={`/products/view-products/${id}`}>EDIT</Link>
+          <button
+            onClick={() =>
+              deleteProduct(id).then(() => window.location.reload())
+            }
+          >
+            DELETE
+          </button>
         </div>
       )
     },
@@ -58,36 +63,3 @@ const ViewProductsTable = () => {
 }
 
 export default ViewProductsTable
-
-// const rows = [
-//   {
-//     id: 1,
-//     name: "Frozen yoghurt",
-//     seller: "moh",
-//     brand: "momo",
-//     price: 55,
-//     rating: 4.6,
-//   },
-//   {
-//     id: 2,
-//     name: "not not Frozen yoghurt",
-//     seller: "mohamad",
-//     brand: "momo bobo",
-//     price: 55,
-//     rating: 4.6,
-//   },
-// ]
-
-// const [products, setProducts] = useState<(typeof any)[]>([])
-
-// useEffect(() => {
-//   const fetchData = async () => {
-//     try {
-//       const data = await getAllProducts()
-//       setProducts(data)
-//     } catch (error) {
-//       console.error("Error fetching products: ", error)
-//     }
-//   }
-//   fetchData()
-// }, [])
